@@ -25,8 +25,10 @@ prometheus_node_exporter_parameters:
   - "-collectors.enabled={{ prometheus_node_exporter_collectors_enable | join(',') }}"
   - "-web.listen-address={{ prometheus_node_exporter_web_listen_address }}"
   - '-log.level=info'
-  - '-collector.diskstats.ignored-devices="^(ram|loop|fd)\\d+$"'
+  - '-collector.diskstats.ignored-devices=^(ram|loop|fd)\d+$'
+  - '-collector.filesystem.ignored-mount-points=^/(sys|proc|dev|run)($|/)'
   - '-collector.netdev.ignored-devices="{{ prometheus_node_exporter_collector_netdev_ignored_devices }}"'
+  - '-collector.textfile.directory=/var/lib/prometheus/node-exporter'
 
 prometheus_node_exporter_file_sd: False
 # prometheus_node_exporter_file_sd_locations:
